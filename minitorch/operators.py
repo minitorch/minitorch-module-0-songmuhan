@@ -144,13 +144,13 @@ def map(fn: Callable[[float], float]) -> Callable[[Iterable[float]], Iterable[fl
          new list
     """
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    return lambda ls: [fn(x) for x in ls]
 
 
 def negList(ls: Iterable[float]) -> Iterable[float]:
     "Use `map` and `neg` to negate each element in `ls`"
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    return map(neg)(ls)
 
 
 def zipWith(
@@ -170,13 +170,13 @@ def zipWith(
 
     """
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    return lambda ls1, ls2: [fn(x, y) for x, y in zip(ls1, ls2)]
 
 
 def addLists(ls1: Iterable[float], ls2: Iterable[float]) -> Iterable[float]:
     "Add the elements of `ls1` and `ls2` using `zipWith` and `add`"
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    return zipWith(add)(ls1, ls2)
 
 
 def reduce(
@@ -194,17 +194,24 @@ def reduce(
          $x_1 \ldots x_n$ and computes the reduction :math:`fn(x_3, fn(x_2,
          fn(x_1, x_0)))`
     """
+
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    def _reduce(_iter: Iterable[float]) -> float:
+        _start = start
+        for x in _iter:
+            _start = fn(_start, x)
+        return _start
+
+    return lambda ls: _reduce(ls)
 
 
 def sum(ls: Iterable[float]) -> float:
     "Sum up a list using `reduce` and `add`."
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    return reduce(add, 0)(ls)
 
 
 def prod(ls: Iterable[float]) -> float:
     "Product of a list using `reduce` and `mul`."
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    return reduce(mul, 1)(ls)
